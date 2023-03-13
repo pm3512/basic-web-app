@@ -7,5 +7,5 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
-  return "";
+  return "Default match";
 }
