@@ -1,7 +1,7 @@
 export default function QueryProcessor(query: string): string {
   const lower = query.toLowerCase();
   if (lower.includes('name')) {
-    return 'Alex'
+    return 'Alexander Obolenskiy'
   }
   if (lower.includes("shakespeare")) {
     return (
