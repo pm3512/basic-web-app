@@ -54,6 +54,13 @@ export default function QueryProcessor(query: string): string {
     const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a * b);
     return sum.toString();
   }
+  if(lower.startsWith('what is ') && lower.includes(' to the power of ')) {
+    const suff = lower.slice('what is '.length).replaceAll('?', '');
+    const nums = suff.split(' to the power of ');
+    const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a ** b);
+    return sum.toString();
+  }
+
   console.log(123)
   if (lower.startsWith('which of the following numbers is both a square and a cube:')) {
   console.log(456)
