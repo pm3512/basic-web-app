@@ -22,12 +22,15 @@ export default function QueryProcessor(query: string): string {
     const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a * b);
     return sum.toString();
   }
+  console.log(123)
   if (lower.startsWith('which of the following numbers is both a square and a cube:')) {
+  console.log(456)
     const suff = lower.slice('which of the following numbers is both a square and a cube: '.length).replaceAll(',', '').replaceAll('?', '');
     const nums = suff.split(' ');
-    for (const num in nums) {
+    for (let num of nums) {
       const n = parseInt(num);
       if (Math.sqrt(n) % 1 === 0 && Math.cbrt(n) % 1 === 0) {
+        console.log(n, num, nums)
         return n.toString();
       }
     }
