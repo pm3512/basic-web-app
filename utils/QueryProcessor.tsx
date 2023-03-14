@@ -1,3 +1,21 @@
+function isPrime(n: number): boolean {
+  if (n < 2) {
+    return false;
+  }
+  if (n === 2) {
+    return true;
+  }
+  if (n % 2 === 0) {
+    return false;
+  }
+  const sqrt = Math.sqrt(n);
+  for (let i = 3; i <= sqrt; i += 2) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
 export default function QueryProcessor(query: string): string {
   const lower = query.toLowerCase();
 
@@ -35,6 +53,18 @@ export default function QueryProcessor(query: string): string {
       }
     }
   }
+   if (lower.startsWith('which of the following numbers are primes: ')) {
+    const suff = lower.slice('which of the following numbers are primes: '.length).replaceAll(',', '').replaceAll('?', '');
+    const nums = suff.split(' ');
+    const primes = [];
+    for (let num of nums) {
+      const n = parseInt(num);
+      if (isPrime(n)) {
+        primes.push(n);
+      }
+    }
+    return primes.join(', ');
+   }
 
   const fixed_map = new Map([
     [ 'what is your name?', 'Alexander Obolenskiy' ],
