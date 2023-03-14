@@ -15,6 +15,13 @@ export default function QueryProcessor(query: string): string {
     const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a + b);
     return sum.toString();
   }
+
+  if(lower.startsWith('what is ') && lower.includes(' multiplied by ')) {
+    const suff = lower.slice('what is '.length).replaceAll('?', '');
+    const nums = suff.split(' multiplied by ');
+    const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a * b);
+    return sum.toString();
+  }
   if (lower.startsWith('which of the following numbers is both a square and a cube:')) {
     const suff = lower.slice('which of the following numbers is both a square and a cube: '.length).replaceAll(',', '').replaceAll('?', '');
     const nums = suff.split(' ');
