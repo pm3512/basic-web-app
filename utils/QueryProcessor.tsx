@@ -41,6 +41,13 @@ export default function QueryProcessor(query: string): string {
     return sum.toString();
   }
 
+  if(lower.startsWith('what is ') && lower.includes(' divided by ')) {
+    const suff = lower.slice('what is '.length).replaceAll('?', '');
+    const nums = suff.split(' divided by ');
+    const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a / b);
+    return sum.toString();
+  }
+
   if(lower.startsWith('what is ') && lower.includes(' multiplied by ')) {
     const suff = lower.slice('what is '.length).replaceAll('?', '');
     const nums = suff.split(' multiplied by ');
