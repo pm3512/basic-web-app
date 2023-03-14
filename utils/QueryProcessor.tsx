@@ -4,9 +4,7 @@ export default function QueryProcessor(query: string): string {
   console.log(lower)
   if(lower.startsWith('which of the following numbers is the largest: ')) {
     const suff = lower.slice('which of the following numbers is the largest: '.length).replaceAll(',', '').replaceAll('?', '');
-    console.log('suff', suff)
     const nums = suff.split(' ');
-    console.log('nums', nums)
     const max = Math.max(...nums.map((x) => parseInt(x)));
     return max.toString();
   }
@@ -16,6 +14,16 @@ export default function QueryProcessor(query: string): string {
     const nums = suff.split(' plus ');
     const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a + b);
     return sum.toString();
+  }
+  if (lower.startsWith('which of the following numbers is both a square and a cube:')) {
+    const suff = lower.slice('which of the following numbers is both a square and a cube: '.length).replaceAll(',', '').replaceAll('?', '');
+    const nums = suff.split(' ');
+    for (const num in nums) {
+      const n = parseInt(num);
+      if (Math.sqrt(n) % 1 === 0 && Math.cbrt(n) % 1 === 0) {
+        return n.toString();
+      }
+    }
   }
 
   const fixed_map = new Map([
