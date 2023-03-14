@@ -11,6 +11,13 @@ export default function QueryProcessor(query: string): string {
     return max.toString();
   }
 
+  if(lower.startsWith('what is ') && lower.includes(' plus ')) {
+    const suff = lower.slice('what is '.length).replaceAll('?', '');
+    const nums = suff.split(' plus ');
+    const sum = nums.map((x) => parseInt(x)).reduce((a, b) => a + b);
+    return sum.toString();
+  }
+
   const fixed_map = new Map([
     [ 'what is your name?', 'Alexander Obolenskiy' ],
     [ '', '' ],
